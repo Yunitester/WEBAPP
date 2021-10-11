@@ -1,0 +1,38 @@
+目录创建时选择“Python Package”格式。测试引擎脚本存放路径，如测试执行时驱动所有测试业务、测试用例的脚本文件module.py。
+
+module.py包含测试集读取函数read_testsuite、获取驱动函数get_driver、测试用例读取函数read_testcase、测试执行函数exec_。
+
+1.read_testsuite
+
+read_testsuite函数负责解析测试场景文件。os.path.abspath方法获取当前脚本的执行路径，以便于data目录中的testsuite.xlsx测试场景文件。
+通过引用os.path方式，增强了脚本的可移植性。
+
+测试脚本代码用for irow in range(2, ws.max_row + 1)循环迭代读取测试场景文件testsuite.xlsx中的每一行记录，通过传入的测试场景名称，
+先判断是否存在需测试的场景名称，如果有则再用if testoperation=='do'判断是否要获取第三项中保存的场景文件名。
+这里关键字do代表的是执行，第二列的关键字可以根据将来的需要进一步拓展，设计更多的关键字。
+
+2.get_driver
+
+根据测试场景文件确定调用何种浏览器，并启动浏览器。
+
+
+3.exec_
+
+exec_(testpage,teststep,testaction,testdata)功能是接受testpage,teststep,testdata三个参数，分别代表主页类（对象），页面元素，页面数据。
+代码首先判断主页类（testpage）属于那个类，这些类是已经实现的page object类。testpage类中有一个是浏览器类，
+是Webdriver实现的。脚本分别实现了三个类的testpage判断，分别是浏览器、登陆页面类、主页页面类三个类。
+
+第一个根据testpage是否是浏览器类后，按照teststep判断浏览器类型firefox、IE及chrome生成对象实例，最后请求testdata变量保存的网页链接。
+
+第二个根据testpage是否是登陆页面类后，判断执行teststep用户名或密码等动作，来执行页面对象的操作，操作数据用传入的testdata.
+
+第二个根据testpage是否是主页页面类后，判断teststep是否执行退出ECShop动作。
+
+
+4.read_testcase
+
+read_testcase(testcasefile)是解析testcase文件如login.xlsx，userregister.xlsx等，参数是测试用例文件路径。
+for irow in range(2, ws.max_row + 1)是从第二行开始遍历，ws.max是获得测试用例文件有测试脚本指令的行数，
+参数从2开始，是因为第一行是标题，第二行开始才是正式脚本。
+Testpage，teststep，testdata分别保存了测试用例文件（userregister.xlsx，login.xlsx）中的page，step，data数据，
+它们代表了页面类，元素对象，元素数据。然后作为参数传给exec_函数。

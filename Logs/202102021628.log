@@ -1,6 +1,0 @@
-2021-02-02 16:28:22,769 - TestSuite - INFO - 已找到TestSuite文件，开始分析测试集...
-2021-02-02 16:28:22,800 - TestSuite - INFO - login 场景无须测试
-2021-02-02 16:28:22,800 - TestSuite - INFO - ******************************
-2021-02-02 16:28:22,800 - TestSuite - INFO - 执行 client 测试场景
-2021-02-02 16:28:22,800 - TestSuite - INFO - 已找到 D:\PycharmProjects\WEBTEST\data\client.xlsx 测试用例，现在开始读取该用例
-2021-02-02 16:28:22,846 - TestSuite - INFO - 正在启动浏览器
